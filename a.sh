@@ -1,6 +1,6 @@
 #!/bin/bash
-
-if [["`dotnet --list-sdks`" == *"3.1"*]]; then
+dotnet_check=`dotnet --list-sdks`
+if [[ "$dotnet_check" == *"3.1"* ]]; then
 dotnet publish -c Release --framework netcoreapp3.1 --runtime osx-x64
 cp -rf attributes/* bin/Release/netcoreapp3.1/osx-x64/.
 mv bin/Release/netcoreapp3.1/osx-x64 ../FBQuickCommenterApp
