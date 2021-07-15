@@ -9,7 +9,7 @@ namespace FB.QuickCommenter
     {
         static async Task Main()
         {
-            var fbApiAddress = "https://graph.facebook.com/v8.0/";
+            var fbApiAddress = "https://graph.facebook.com/v11.0/";
             Console.Write("Введите access token:");
             var token = Console.ReadLine();
             var cs = new ConnectSettings() { Token = token };
@@ -22,25 +22,49 @@ namespace FB.QuickCommenter
             {
                 Console.WriteLine($"{i + 1}. {posts[i].Item2}");
             }
+            Console.WriteLine("Q. Прокомментировать все посты");
             Console.Write("Выберите пост:");
-            var index = int.Parse(Console.ReadLine()) - 1;
-            var postId = posts[index].Item1;
-            var comments = CommentsHelper.GetComments();
-            Console.WriteLine($"Найдено {comments.Count} комментариев!");
-            await BulkHelper.BulkProcessAsync(fbApiAddress, async (re, cs) =>
-            {
-                if (comments.Count == 0)
-                {
-                    Console.WriteLine("Комментарии кончились!");
-                    return;
+            var user_input = Console.ReadLine();
+            if(user_input.Equals("Q") || user_input.Equals("q")){
+                for (var index = 0; index < posts.Count; index++){
+                    var postId = posts[index].Item1;
+                    var comments = CommentsHelper.GetComments();
+                    Console.WriteLine($"Найдено {comments.Count} комментариев!");
+                    await BulkHelper.BulkProcessAsync(fbApiAddress, async (re, cs) =>
+                    {
+                        if (comments.Count == 0)
+                        {
+                            Console.WriteLine("Комментарии кончились!");
+                            return;
+                        }
+                        var c = comments[0];
+                        comments.RemoveAt(0);
+                        Console.WriteLine($"Оставляем коммент:{c}");
+                        var cm = new CommentsManager(re);
+                        await cm.AddCommentAsync(c, postId);
+                        });
                 }
-                var c = comments[0];
-                comments.RemoveAt(0);
-                Console.WriteLine($"Оставляем коммент:{c}");
-                var cm = new CommentsManager(re);
-                await cm.AddCommentAsync(c, postId);
-            });
-            Console.ReadKey();
+                Console.ReadKey();
+            }else{
+                var index = int.Parse(user_input) - 1;
+                var postId = posts[index].Item1;
+                var comments = CommentsHelper.GetComments();
+                Console.WriteLine($"Найдено {comments.Count} комментариев!");
+                await BulkHelper.BulkProcessAsync(fbApiAddress, async (re, cs) =>
+                {
+                    if (comments.Count == 0)
+                    {
+                        Console.WriteLine("Комментарии кончились!");
+                        return;
+                    }
+                    var c = comments[0];
+                    comments.RemoveAt(0);
+                    Console.WriteLine($"Оставляем коммент:{c}");
+                    var cm = new CommentsManager(re);
+                    await cm.AddCommentAsync(c, postId);
+                    });
+                Console.ReadKey();
+            }
         }
     }
 }
