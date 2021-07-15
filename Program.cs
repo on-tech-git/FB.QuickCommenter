@@ -30,6 +30,8 @@ namespace FB.QuickCommenter
                     var postId = posts[index].Item1;
                     var comments = CommentsHelper.GetComments();
                     Console.WriteLine($"Найдено {comments.Count} комментариев!");
+                    var photos = PhotosHelper.GetPhotos();
+                    Console.WriteLine($"Найдено {photos.Count} фотографий!");
                     await BulkHelper.BulkProcessAsync(fbApiAddress, async (re, cs) =>
                     {
                         if (comments.Count == 0)
@@ -37,12 +39,19 @@ namespace FB.QuickCommenter
                             Console.WriteLine("Комментарии кончились!");
                             return;
                         }
+                        if (photos.Count == 0)
+                        {
+                            Console.WriteLine("Фотографии кончились!");
+                            return;
+                        }
                         var c = comments[0];
                         comments.RemoveAt(0);
-                        Console.WriteLine($"Оставляем коммент:{c}");
+                        var p = photos[0];
+                        photos.RemoveAt(0);
+                        Console.WriteLine($"Оставляем коммент {c} с фотографией {p}");
                         var cm = new CommentsManager(re);
-                        await cm.AddCommentAsync(c, postId);
-                        });
+                        await cm.AddCommentAsync(c, postId, p);
+                    });
                 }
                 Console.ReadKey();
             }else{
@@ -50,6 +59,8 @@ namespace FB.QuickCommenter
                 var postId = posts[index].Item1;
                 var comments = CommentsHelper.GetComments();
                 Console.WriteLine($"Найдено {comments.Count} комментариев!");
+                var photos = PhotosHelper.GetPhotos();
+                Console.WriteLine($"Найдено {photos.Count} фотографий!");
                 await BulkHelper.BulkProcessAsync(fbApiAddress, async (re, cs) =>
                 {
                     if (comments.Count == 0)
@@ -57,12 +68,19 @@ namespace FB.QuickCommenter
                         Console.WriteLine("Комментарии кончились!");
                         return;
                     }
+                    if (photos.Count == 0)
+                    {
+                        Console.WriteLine("Фотографии кончились!");
+                        return;
+                    }
                     var c = comments[0];
                     comments.RemoveAt(0);
-                    Console.WriteLine($"Оставляем коммент:{c}");
+                    var p = photos[0];
+                    photos.RemoveAt(0);
+                    Console.WriteLine($"Оставляем коммент {c} с фотографией {p}");
                     var cm = new CommentsManager(re);
-                    await cm.AddCommentAsync(c, postId);
-                    });
+                    await cm.AddCommentAsync(c, postId, p);
+                });
                 Console.ReadKey();
             }
         }
