@@ -6,6 +6,9 @@ cp -rf attributes/* bin/Release/netcoreapp3.1/osx-x64/.
 mv bin/Release/netcoreapp3.1/osx-x64 ../FBQuickCommenterApp
 echo "-------------------"
 echo "Установка завершена!"
+echo "Программа находится на рабочем столе в папке \"FBQuickCommenterApp\"."
+echo "Папку \"FB.QuickCommenter\" можно удалить."
+echo "Чтобы завершить программу, нажмите Ctrl+C."
 echo "Чтобы запустить программу, введите комманду: cd ~/Desktop/FBQuickCommenterApp && ./FB.QuickCommenter"
 echo "Не забудьте изменить комментарии в папке comments и ссылки на фото в папке photos!"
 echo "Без аккаунтов приложение работать не будет! Измените файл accounts.txt"
