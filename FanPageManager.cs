@@ -95,7 +95,7 @@ namespace FB.QuickCommenter
             var user_input = Console.ReadLine();
             if(user_input.Equals("2")){
                 Console.Write("Выбраны посты рекламные.");
-                var req = new RestRequest($"{fpId}/ads_posts", Method.GET);
+                req = new RestRequest($"{fpId}/ads_posts", Method.GET);
             }else{
                 Console.Write("Выбраны посты не рекламные.");
             }
