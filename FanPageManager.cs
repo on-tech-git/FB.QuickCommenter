@@ -90,6 +90,7 @@ namespace FB.QuickCommenter
 
         public async Task<List<(string, string)>> GetPostIdsAsync(string fpId, string accessToken)
         {
+            var req = null;
             Console.Write("Показать посты не рекламные (1/Enter) или рекламные (2)?:");
             var user_input = Console.ReadLine();
             if(user_input.Equals("2")){
