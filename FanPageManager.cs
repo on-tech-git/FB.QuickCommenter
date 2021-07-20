@@ -90,7 +90,7 @@ namespace FB.QuickCommenter
 
         public async Task<List<(string, string)>> GetPostIdsAsync(string fpId, string accessToken)
         {
-            var req = null;
+            var req = new RestRequest($"{fpId}/published_posts", Method.GET);
             Console.Write("Показать посты не рекламные (1/Enter) или рекламные (2)?:");
             var user_input = Console.ReadLine();
             if(user_input.Equals("2")){
@@ -98,7 +98,6 @@ namespace FB.QuickCommenter
                 var req = new RestRequest($"{fpId}/ads_posts", Method.GET);
             }else{
                 Console.Write("Выбраны посты не рекламные.");
-                var req = new RestRequest($"{fpId}/published_posts", Method.GET);
             }
             req.AddQueryParameter("fields", "message");
             req.AddQueryParameter("access_token", accessToken);
