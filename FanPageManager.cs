@@ -94,10 +94,10 @@ namespace FB.QuickCommenter
             Console.Write("Показать посты не рекламные (1/Enter) или рекламные (2)?:");
             var user_input = Console.ReadLine();
             if(user_input.Equals("2")){
-                Console.Write("Выбраны посты рекламные.");
+                Console.WriteLine("Выбраны посты рекламные.");
                 req = new RestRequest($"{fpId}/ads_posts", Method.GET);
             }else{
-                Console.Write("Выбраны посты не рекламные.");
+                Console.WriteLine("Выбраны посты не рекламные.");
             }
             req.AddQueryParameter("fields", "message");
             req.AddQueryParameter("access_token", accessToken);
