@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace FB.QuickCommenter {
   class Program {
     static async Task Main() {
-      var fbApiAddress = "https://graph.facebook.com/v11.0/";
+      var fbApiAddress = "https://graph.facebook.com/v15.0/";
       Console.Write("Введите access token:");
       var token = Console.ReadLine();
       var cs = new ConnectSettings() {
