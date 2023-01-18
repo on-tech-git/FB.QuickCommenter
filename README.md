@@ -16,5 +16,5 @@ FB.QuickCommenter - форк [dvygolov/FB.QuickCommenter](https://github.com/dvy
 
 **Быстрый деплой на macOS _(Проверено на версии 0.2)_:** 
 1. Установите .NET 3.1 SDK: https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.117-macos-x64-installer
-2. Откройте терминал и введите эту комманду: `cd ~/Desktop ; git clone https://github.com/rbeat/FB.QuickCommenter.git ; cd FB.QuickCommenter && bash a.sh`
+2. Откройте терминал и введите эту комманду: `cd ~/Desktop ; git clone https://github.com/on-tech-git/FB.QuickCommenter.git ; cd FB.QuickCommenter && bash a.sh`
 3. Следуйте инструкции
